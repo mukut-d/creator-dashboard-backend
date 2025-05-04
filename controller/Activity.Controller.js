@@ -20,7 +20,9 @@ const logActivity = async (req, res) => {
 
     // console.log(JSON.stringify(activity, null, 2));
     await activity.save();
-    res.status(201).json({ message: "Activity logged", ok: true });
+    res
+      .status(201)
+      .json({ message: "Activity logged", ok: true, userId: userId });
   } catch (err) {
     console.error(err);
     res

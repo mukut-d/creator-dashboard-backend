@@ -35,7 +35,7 @@ const getCredits = async (req, res) => {
   try {
     const userId = req.user._id;
     const user = await User.findById(userId).select("credits");
-    res.status(200).json({ credits: user.credits, userId });
+    res.status(200).json({ credits: user.credits, userId, ok: true });
   } catch (err) {
     res
       .status(500)
@@ -51,7 +51,7 @@ const getAllUserCredits = async (req, res) => {
   try {
     const adminId = req.user._id;
     const users = await User.find().select("username email credits");
-    res.status(200).json({ adminId, users });
+    res.status(200).json({ adminId, users, ok: true });
   } catch (err) {
     res
       .status(500)
