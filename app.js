@@ -15,9 +15,8 @@ const corsOptions = {
   origin: [
     "https://creator-dashboard-frontend.web.app",
     "https://creator-dashboard-frontend.firebaseapp.com",
-    // Add localhost for development
     "http://localhost:3000",
-    "http://localhost:5000",
+    "http://localhost:5173",
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -26,7 +25,7 @@ const corsOptions = {
 };
 
 // Apply CORS middleware
-app.use(cors(corsOptions));
+app.use("*", cors(corsOptions));
 app.use(express.json());
 app.use(
   express.urlencoded({
