@@ -9,7 +9,7 @@ This is the **frontend** of the Creator Dashboard web application, built using *
 ## 🚀 Live Demo
 
 🌐 Frontend: [creator-dashboard-frontend.web.app](https://creator-dashboard-frontend.web.app)  
-🔗 Backend API: [creator-backend on Google Cloud Run](https://creator-backend-225020848824.us-central1.run.app)
+🔗 Backend API: [creator-backend on Google Cloud Run](https://creator-dashboard-backend-225020848824.asia-south2.run.app)
 
 ---
 
