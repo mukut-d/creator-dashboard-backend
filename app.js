@@ -10,19 +10,23 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:5173",
-      "https://creator-backend-225020848824.us-central1.run.app",
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
+// CORS configuration
+const corsOptions = {
+  origin: [
+    "https://creator-dashboard-frontend.web.app",
+    "https://creator-dashboard-frontend.firebaseapp.com",
+    // Add localhost for development
+    "http://localhost:3000",
+    "http://localhost:5000",
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
 
+// Apply CORS middleware
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(
   express.urlencoded({

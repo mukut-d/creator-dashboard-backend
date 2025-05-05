@@ -16,6 +16,8 @@ const userSignup = async (req, res) => {
   try {
     const { name, password, role } = req.body;
 
+    console.log("req1 body " + JSON.stringify(req.body));
+
     const existing = await User.findOne({ name });
 
     if (existing) {
