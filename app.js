@@ -18,10 +18,8 @@ const corsOptions = {
     "http://localhost:3000",
     "http://localhost:5173",
   ],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-  optionsSuccessStatus: 200,
 };
 
 // Apply CORS middleware
@@ -35,15 +33,45 @@ app.use(
   })
 );
 
-connectDB();
-
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", savedRoutes);
 app.use("/api/activity", activityRoutes);
 app.use("/api/credits", creditRoutes);
 
+connectDB();
+
+const listRoutes = (app, baseUrl) => {
+  console.log("📂 Available Routes:");
+
+  // console.log(JSON.stringify(app._router, null, 2));
+  // console.log("base url " + baseurl);
+
+  app._router.stack.forEach((middleware) => {
+    if (middleware.route) {
+      // Regular routes
+      const method = Object.keys(middleware.route.methods)
+        .join(", ")
+        .toUpperCase();
+      console.log(`${method} ${baseUrl}${middleware.route.path}`);
+    } else if (middleware.name === "router") {
+      // Nested router middleware
+      middleware.handle.stack.forEach((handler) => {
+        if (handler.route) {
+          const method = Object.keys(handler.route.methods)
+            .join(", ")
+            .toUpperCase();
+          console.log(`${method} ${baseUrl}${handler.route.path}`);
+        }
+      });
+    }
+  });
+};
 const PORT = process.env.PORT || 8080;
+const baseurl = `http://localhost:${PORT}`;
+
+console.log("port " + PORT);
 
 app.listen(PORT, () => {
   console.log(`Server running at ${PORT}`);
+  // listRoutes(app, baseurl);
 });

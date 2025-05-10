@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-const auth = require("../middleware/auth");
+const authMiddleware = require("../middleware/auth");
 
 const {
   earnCredits,
@@ -11,11 +11,11 @@ const {
 } = require("../controller/creditController");
 
 // user credits routes
-router.post("/credits/earn", auth, earnCredits);
-router.get("/credits", auth, getCredits);
+router.post("/credits/earn", authMiddleware, earnCredits);
+router.get("/credits", authMiddleware, getCredits);
 
 // admin routes
-router.post("/admin/credits/:userId", auth, updateUserCredits);
-router.get("/admin/credits", auth, getAllUserCredits);
+router.post("/admin/credits/:userId", authMiddleware, updateUserCredits);
+router.get("/admin/credits", authMiddleware, getAllUserCredits);
 
 module.exports = router;
