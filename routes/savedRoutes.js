@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.post("/saved", authMiddleware, savePosts);
 
-router.get("/:id", authMiddleware, getPosts);
+router.get("/saved/:id", authMiddleware, getPosts);
 
 module.exports = router;

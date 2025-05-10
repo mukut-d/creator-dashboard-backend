@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post("/saved", authMiddleware, logActivity);
 
-router.get("/:id", authMiddleware, getActivity);
+router.get("/activity/:id", authMiddleware, getActivity);
 
 module.exports = router;
